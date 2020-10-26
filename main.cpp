@@ -1,27 +1,30 @@
 #include <iostream>
-int main() {
-    char stek[100000];
+#include <stack>
+
+int main()
+{
+	std::stack <std::pair<char, int>> st;
 	char c;
-	unsigned size = 0;
 	unsigned res = 0;
 	while (std::cin.get(c)) {
 		res++;
 		if (c == '\n') {
-			if (size == 0) std::cout << "Success";
-			else std::cout << size--;
-			break;
-		}
-		else if (c == '{' || c == '[' || c == '(') {
-			stek[size++] = c;
-			continue;
+			if (st.empty()) {
+				std::cout << "Success";
+				break;
+			}
+			else {
+				std::cout << st.top().second;
+				break;
+			}
 		}
 		else if (c == '}' || c == ']' || c == ')') {
-			if (size == 0) {
+			if (st.empty()) {
 				std::cout << res;
 				break;
 			}
-			else if ((c == '}' && stek[size - 1] == '{') || (c == ']' && stek[size - 1] == '[') || (c == ')' && stek[size - 1] == '(')) {
-				size--;
+			else if ((c == '}' && st.top().first == '{') || (c == ']' && st.top().first == '[') || (c == ')' && st.top().first == '(')) {
+				st.pop();
 				continue;
 			}
 			else {
@@ -29,6 +32,9 @@ int main() {
 				break;
 			}
 		}
+		else if (c == '{' || c == '[' || c == '(') {
+			st.push(std::make_pair(c, res));
+			continue;
+		}
 	}
-    return 0;
 }
