@@ -8,7 +8,7 @@ int main() {
 		res++;
 		if (c == '\n') {
 			if (size == 0) std::cout << "Success";
-			else std::cout << res--;
+			else std::cout << size--;
 			break;
 		}
 		else if (c == '{' || c == '[' || c == '(') {
