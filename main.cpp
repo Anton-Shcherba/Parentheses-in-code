@@ -3,10 +3,12 @@ int main() {
     char stek[100000];
 	char c;
 	unsigned size = 0;
+	unsigned res = 0;
 	while (std::cin.get(c)) {
+		res++;
 		if (c == '\n') {
 			if (size == 0) std::cout << "Success";
-			else std::cout << size + 1;
+			else std::cout << res--;
 			break;
 		}
 		else if (c == '{' || c == '[' || c == '(') {
@@ -15,7 +17,7 @@ int main() {
 		}
 		else if (c == '}' || c == ']' || c == ')') {
 			if (size == 0) {
-				std::cout << size + 1;
+				std::cout << res;
 				break;
 			}
 			else if ((c == '}' && stek[size - 1] == '{') || (c == ']' && stek[size - 1] == '[') || (c == ')' && stek[size - 1] == '(')) {
@@ -23,11 +25,10 @@ int main() {
 				continue;
 			}
 			else {
-				std::cout << size + 1;
+				std::cout << res;
 				break;
 			}
 		}
-		else size++;
 	}
     return 0;
 }
